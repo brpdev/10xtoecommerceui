@@ -1,0 +1,139 @@
+<div style="margin-left: 10px; margin-right: 10px; margin-bottom: 5px;">
+    <div id="content-to-print" style="width: 100%; height: 100%;">
+        <div class="review-order-form">
+            <!-- Bill To Section -->
+            <div class="section bill-to">
+                <h2>Bill To</h2>
+                <p><strong>Name:</strong> {{billTo.name}}</p>
+                <p><strong>Address:</strong> {{billTo.address}}</p>
+                <p><strong>Phone:</strong> {{billTo.phone}}</p>
+                <p><strong>Fax:</strong> {{billTo.fax}}</p>
+            </div>
+    
+            <!-- Ship To Section -->
+            <div class="section ship-to">
+                <h2>Ship To</h2>
+                <p><strong>Name:</strong> {{shipTo.name}}</p>
+                <p><strong>Address:</strong> {{shipTo.address}}</p>
+                <p><strong>Phone:</strong> {{shipTo.phone}}</p>
+                <p><strong>Fax:</strong> {{shipTo.fax}}</p>
+            </div>
+    
+            <!-- Order Details Section -->
+            <div class="order-details">
+                <h2>Order Details</h2>
+                <div class="details-grid">
+                    <div>
+                        <label>Cancel Date:</label>
+                        <p>{{ orderDetails.cancelDate }}</p>
+                    </div>
+                    <div>
+                        <label>Job Release:</label>
+                        <p>{{ orderDetails.jobRelease }}</p>
+                    </div>
+                    <div>
+                        <label>Phone:</label>
+                        <p>{{ orderDetails.phone }}</p>
+                    </div>
+                    <div>
+                        <label>PO Number:</label>
+                        <p>{{ orderDetails.poNumber }}</p>
+                    </div>
+                    <div>
+                        <label>Email Address:</label>
+                        <p>{{ orderDetails.emailAddress }}</p>
+                    </div>
+                    <div>
+                        <label>Payment Type:</label>
+                        <p>{{ orderDetails.paymentType }}</p>
+                    </div>
+                    <div>
+                        <label>Ship Via:</label>
+                        <p>{{ orderDetails.shipVia }}</p>
+                    </div>
+                    <div>
+                        <label>Shipping Account:</label>
+                        <p>{{ orderDetails.shippingAccount }}</p>
+                    </div>
+                    <div>
+                        <label>Additional Information:</label>
+                        <p>{{ orderDetails.additionalInfo }}</p>
+                    </div>
+                    <div>
+                        <label>Contact:</label>
+                        <p>{{ orderDetails.contact }}</p>
+                    </div>
+                    <div>
+                        <label>Entered By:</label>
+                        <p>{{ orderDetails.enteredBy }}</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="product-grid">
+                <h2>Products</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of products">
+                            <td><img [src]="product.image" alt="{{ product.name }}" width="50" height="50"></td>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.quantity }}</td>
+                            <td>${{ product.unitPrice.toFixed(2) }}</td>
+                            <td>${{ product.total.toFixed(2) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        
+            <!-- Pricing Summary Section -->
+            <div class="pricing-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-item">
+                    <label>Subtotal:</label>
+                    <span>${{ orderSummary.subtotal.toFixed(2) }}</span>
+                </div>
+                <div class="summary-item">
+                    <label>Rebate:</label>
+                    <span>-${{ orderSummary.rebate.toFixed(2) }}</span>
+                </div>
+                <div class="summary-item">
+                    <label>Tax:</label>
+                    <span>${{ orderSummary.tax.toFixed(2) }}</span>
+                </div>
+                <div class="summary-item total">
+                    <label>Total:</label>
+                    <span>${{ orderSummary.total.toFixed(2) }}</span>
+                </div>
+            </div>
+        
+            <!-- Free Shipping Message -->
+            <div class="free-shipping-message">
+                <p><strong>Free shipping</strong> for orders over $300!</p>
+            </div>
+        
+           
+        </div>    
+    </div>
+    <div  class="review-order-form">
+        <!-- Checkbox for Agreement -->
+         <div class="checkbox-section">
+            <input type="checkbox" id="agreeTerms" [(ngModel)]="agreeTerms">
+            <label for="agreeTerms">I agree to the terms and conditions</label>
+        </div>
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button type="submit" class="btn btn-primary" (click)="submitOrder()" [disabled]="!agreeTerms">Submit</button>
+            <button type="button" class="btn btn-secondary" (click)="modifyOrder()">Modify</button>
+        </div>
+    
+    </div>
+</div>

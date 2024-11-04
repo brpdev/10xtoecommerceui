@@ -1,0 +1,274 @@
+<!-- <div class="section-box posi-absolute">
+  <div class="breadcrumbs-div">
+      <div class="container-fluid">
+          <ul class="breadcrumb">
+              <li><a class="font-xs color-gray-1000" href="home">Home</a></li>
+              <li><a class="font-xs color-gray-500" href="register">Registration</a></li>
+          </ul>
+      </div>
+  </div>
+</div> -->
+<section class="section-box shop-template mt-60">
+  <div class="head-main mt-30" style="border-bottom: none;">
+    <div class="row padding-lr-80">
+        <div class="col-md-12">
+            <h1 class="head-text">{{RegistrationLable}}</h1>
+            <p class="text-danger">All fields marked with an asterisk (*) must be completed</p>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isShowMsg" class="col-md-12 b2bmsg">
+  <h5> {{returnmsg}} &nbsp; 
+      <a *ngIf="isShowMsg1" [routerLink]="['/login']" class="greencolor">Go to Login</a>
+  </h5>
+</div>
+<div class="row mb-100 padding-lr-80">
+    <form
+    *ngIf="!isSuccessful"
+    name="form"
+    (ngSubmit)="f.form.valid && onSubmit()"
+    #f="ngForm"
+    novalidate
+    class="requires-validation"
+    >
+    <div class="form-register align-flex justify-content-start align-items-baseline">
+      <div class="col-12 col-md-4 d-flex mb-30">
+        <!-- <div class="form-group"> -->
+        <label class="mb-5">Are you an existing krayden Customer?</label>
+        <div class="did-floating-label-content mb-0 ml-15">
+            <input class="checkagree" type="checkbox" #iscustomer="ngModel" [(ngModel)]="form.iscustomer" name="iscustomer">
+            <!-- <label class="did-floating-label ml-15" id="top-res">No</label> -->
+        </div>
+        </div>
+        <div class="col-12 col-md-4 offset-md-4">
+          <div class="form-group" *ngIf="form.iscustomer">
+              <label for="customerid">Customer ID</label><span class="displaynone">*</span>
+              <div class="did-floating-label-content mb-0">
+                  <input class="did-floating-input brder-color-grey" type="text" autocomplete="off" (blur)="checkcustomer()" [maxlength]=40 #customerid="ngModel" id="customerid" [(ngModel)]="form.customerid" name="customerid" required>
+                  <div *ngIf="iscustomeridValidation" class="invalid-feedback">Customer ID cannot be blank.</div>
+                  <label>The Customer ID can be found on your last invoice</label>
+              </div>
+          </div>
+      </div>
+      <br />
+      <div class="col-12 col-md-4">
+        <div class="form-group">
+        <label for="FirstName">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="FirstName"
+          [(ngModel)]="form.FirstName"
+          required
+          minlength="3"
+          maxlength="20"
+          #username="ngModel"
+          [ngModelOptions]="{standalone: true}"
+        />
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="form-group">
+          <label for="LastName">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="LastName"
+            [(ngModel)]="form.LastName"
+            required
+            minlength="3"
+            maxlength="20"
+            #username="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="phoneNumber"
+            [(ngModel)]="form.phoneNumber"
+            required
+            minlength="10"
+            maxlength="13"
+            #username="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="form-group">
+          <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          [(ngModel)]="form.email"
+          required
+          email
+          #email="ngModel"
+          (blur)="checkemail(form.email)" 
+        />
+        <div class="alert-danger" *ngIf="(email.errors && f.submitted) ||
+         isvalidateemail===false">
+          <div *ngIf="email.errors !== null && email.errors['required']">Email is required</div>
+          <div *ngIf="email.errors !== null && email.errors['email']">
+            Email must be a valid email address
+          </div>
+          <div *ngIf="isvalidateemail===false">
+            Please check emailId
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="form.password"
+          required
+          minlength="6"
+          #password="ngModel"
+        />
+        <div class="alert-danger" *ngIf="password.errors && f.submitted">
+          <div *ngIf="password.errors['required']">Password is required</div>
+          <div *ngIf="password.errors['minlength']">
+            Password must be at least 6 characters
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <label for="password">Confirm Password</label><span class="displaynone">*</span>
+      <div class="did-floating-label-content mb-0 pr-0">
+          <input [type]="hide1 ? 'password' : 'text'" autocomplete="off" class="did-floating-input brder-color-grey mt-0" [maxlength]=20 #ConfirmPassword="ngModel" id="userConfirmPassword" [(ngModel)]="form.ConfirmPassword" name="ConfirmPassword" required validateEqual="Password"
+              reverse="false">
+          <div class="invalid-feedback" *ngIf="confirmPass">Password mismatch</div>
+          <!-- </div> -->
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="form-group">
+        <label for="comapnyName">Company Name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="comapnyName"
+          [(ngModel)]="form.comapnyName"
+          required
+          minlength="3"
+          maxlength="20"
+          #username="ngModel"
+        />
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="form-group">
+        <label for="Address1">Address1</label>
+        <input
+          type="text"
+          class="form-control"
+          name="Address1"
+          [(ngModel)]="form.Address1"
+          required
+          minlength="3"
+          maxlength="20"
+          #username="ngModel"
+        />
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="form-group">
+        <label for="Address2">Address2</label>
+        <input
+          type="text"
+          class="form-control"
+          name="Address2"
+          [(ngModel)]="form.Address2"
+          required
+          minlength="3"
+          maxlength="20"
+          #username="ngModel"
+        />
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="form-group">
+        <label for="Contry">Contry</label>
+        <input
+          type="text"
+          class="form-control"
+          name="Contry"
+          [(ngModel)]="form.Contry"
+          required
+          minlength="3"
+          maxlength="20"
+          #username="ngModel"
+        />
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="form-group">
+        <label for="State">State</label>
+        <input
+          type="text"
+          class="form-control"
+          name="State"
+          [(ngModel)]="form.State"
+          required
+          minlength="3"
+          maxlength="20"
+          #username="ngModel"
+        />
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="form-group">
+        <label for="City">City</label>
+        <input
+          type="text"
+          class="form-control"
+          name="City"
+          [(ngModel)]="form.City"
+          required
+          minlength="3"
+          maxlength="20"
+          #username="ngModel"
+        />
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="form-group">
+        <label for="postalCode">postalCode</label>
+        <input
+          type="text"
+          class="form-control"
+          name="postalCode"
+          [(ngModel)]="form.postalCode"
+          required
+          minlength="3"
+          maxlength="20"
+          #username="ngModel"
+        />
+      </div>
+    </div>
+    <div class="col-md-12">
+      <button type="button"  *ngIf="isvalidateemail==true" (click)="onSubmit()" class="btn btn-buy mr-15 w-auto mb-10">Submit</button>
+  </div>
+</div>
+    
+<div class="alert alert-success" *ngIf="isSuccessful">
+  Your registration is successful!
+</div>
+    <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+      Signup failed!<br />{{ errorMessage }}
+    </div>
+    </form>
+  </div>
+</section>
+  

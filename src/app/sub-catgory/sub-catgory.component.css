@@ -1,0 +1,37 @@
+.child-menu {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next line if necessary */
+    justify-content: space-between; /* Distributes space between items */
+    list-style-type: none; /* Removes bullet points */
+    padding: 0; /* Removes default padding */
+    margin: 0; /* Removes default margin */
+  }
+  
+  .child-menu li {
+    flex: 1 1 calc(20% - 20px); /* 5 items per row with space */
+    margin: 10px; /* Adjust the margin as needed */
+    box-sizing: border-box; /* Ensures padding and border are included in width/height */
+  }
+  
+
+  .product-details {
+    margin-top: 10px; /* Space between the category and product details */
+    padding: 10px; /* Padding for the product details */
+    background-color: #f9f9f9; /* Light background for distinction */
+    border: 1px solid #e0e0e0; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
+  .detail-item {
+    display: flex; /* Align image and text side by side */
+    align-items: center; /* Center vertically */
+    margin-bottom: 5px; /* Space between detail items */
+  }
+  
+  .detail-image {
+    width: 30px; /* Set width of the image */
+    height: 30px; /* Set height of the image */
+    margin-right: 10px; /* Space between image and text */
+    border-radius: 5px; /* Optional: add rounded corners to the image */
+  }
+  

@@ -1,0 +1,370 @@
+<div class="container mt-5">
+  <div class="row">
+    <button mat-button (click)="openDialog()">Add Address</button>
+    <!-- Billing Information Section -->
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <button class="btn btn-link fw-bold" style="font-size: 24px;" data-bs-toggle="collapse" data-bs-target="#billingInfo" aria-expanded="false" aria-controls="billingInfo">
+        1.Billing Information
+      </button>
+      
+          <!-- <h2>
+              <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#billingInfo" aria-expanded="false" aria-controls="billingInfo">
+                  Billing Information
+              </button>
+          </h2> -->
+          <div id="billingInfo" class="collapse show">
+              <form [formGroup]="billingForm" (ngSubmit)="onSubmitBilling()">
+                  <div class="mb-3">
+                      <label for="billingName" class="form-label">Name</label>
+                      <input type="text" id="billingName" value="{{customerMaster?.firstName}}" formControlName="billingName" class="form-control" placeholder="Enter your name" required>
+                  </div>
+                   <div class="mb-3">
+          <label for="Phone" class="form-label">Phone</label>
+          <input type="text" id="billingName" formControlName="phone" value="{{customerMaster?.phone}}" class="form-control" placeholder="Enter your Phone" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="Email" class="form-label">Email</label>
+          <input type="text" id="email" formControlName="email" value="{{customerMaster?.email}}" class="form-control" placeholder="Enter your Email" required>
+        </div>
+        <div class="mb-3">
+          <label for="Fax" class="form-label">FAX</label>
+          <input type="text" id="fax" formControlName="fax" class="form-control" value="{{customerMaster?.phoneExtension}}" placeholder="Enter your Fax" required>
+        </div>
+        <div class="mb-3">
+          <label for="Fax" class="form-label">Please Copy Address here </label>
+          <input type="text" id="address"  value="{{customerAddress?.address1}}" formControlName="address" class="form-control" placeholder="Enter your Address" required>
+        </div>
+             <div class="mb-3">
+          <label for="billingAddress1" class="form-label">Address1</label>
+          <input type="text" id="billingAddress1" value="{{customerAddress?.address2}}" formControlName="billingAddress1" class="form-control" placeholder="Enter your address1" required>
+        </div>
+        <div class="mb-3">
+          <label for="billingAddress2" class="form-label">Address2</label>
+          <input type="text" id="billingAddress2" value="{{customerAddress?.address3}}" formControlName="billingAddress2" class="form-control" placeholder="Enter your address2" required>
+        </div>
+        <div class="mb-3">
+          <label for="billingCountry" class="form-label">Country</label>
+          <input type="text" id="billingCountry" value="{{customerAddress?.country}}" formControlName="country" class="form-control" placeholder="Enter your Country" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="billingState" class="form-label">State</label>
+          <input type="text" id="billingState" value="{{customerAddress?.state}}" formControlName="state" class="form-control" placeholder="Enter your State" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="billingCity" class="form-label">City</label>
+          <input type="text" id="billingCity" value="{{customerAddress?.city}}" formControlName="city" class="form-control" placeholder="Enter your City" required>
+        </div>
+           <div class="mb-3">
+          <label for="billingZip" class="form-label">Postal Code</label>
+          <input type="text" id="billingZip" value="{{customerAddress?.postal}}" formControlName="postalCode" class="form-control" placeholder="Enter Postal code" required>
+        </div>
+              </form>
+          </div>
+      </div>
+
+      <!-- Shipping Information Section -->
+      <div class="col-lg-6 col-md-6 col-sm-12">
+          <h2>
+           
+              <button class="btn btn-link fw-bold" style="font-size: 24px;" data-bs-toggle="collapse" data-bs-target="#shippingInfo" aria-expanded="false" aria-controls="shippingInfo">
+                  2.Shipping Information
+              </button>
+          </h2>
+          <div id="shippingInfo" class="collapse show">
+            <form  [formGroup]="shippingForm" (ngSubmit)="onSubmitShipping()">
+              <div class="mb-3 from-dropdown">
+                <label for="listExistAddress" class="form-label">Select Address</label>
+                
+                <select id="listExistAddress" formControlName="paymentType" class="form-control" required>
+                  <option value="" disabled selected>Select Existing Addres </option>
+                  <option *ngFor="let paym of shipmentAddress" [value]="paym.location">{{ paym.location }}</option>
+                </select>
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" id="sameAsResidential" formControlName="sameAsBilling" class="form-check-input">
+                <label for="sameAsResidential" class="form-check-label">Same as Billing address</label>
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" id="residential" formControlName="residential" class="form-check-input">
+                <label for="residential" class="form-check-label"> Residential </label>
+    
+                <div class="mb-3">
+                    <label for="shippingName" class="form-label">Ship To Name</label>
+                    <input type="text" id="shippingName" formControlName="shippingToName" class="form-control" placeholder="Enter your name" required>
+                  </div>
+              </div>
+          
+              <div class="mb-3 form-check">
+                <input type="checkbox" id="blindShopping" formControlName="blindShopping" class="form-check-input">
+                <label for="blindShopping" class="form-check-label">Blind shopping</label>
+              </div>
+              <div class="mb-3">
+                <label for="attn" class="form-label">Attn</label>
+                <input type="text" id="attn" formControlName="attn" class="form-control" placeholder="Enter your attn" required>
+              </div>
+    
+              <div class="mb-3">
+                <label for="Phone" class="form-label">Phone</label>
+                <input type="text" id="billingName" value="{{customerMaster?.phone}}" formControlName="phone" class="form-control" placeholder="Enter your Phone" required>
+              </div>
+    
+              <div class="mb-3">
+                <label for="Fax" class="form-label">Please Copy Address here </label>
+                <input type="text" id="address" value="{{shipingLocation?.shipingLocation}}" formControlName="address" class="form-control" placeholder="Enter your Address" required>
+              </div>
+    
+              <div class="mb-3">
+                <label for="billingAddress1" class="form-label">Address1</label>
+                <input type="text" id="billingAddress1" value="{{shipingLocation?.address1}}" formControlName="billingAddress1" class="form-control" placeholder="Enter your address1" required>
+              </div>
+              <div class="mb-3">
+                <label for="billingAddress2" class="form-label">Address2</label>
+                <input type="text" id="billingAddress2" value="{{shipingLocation?.address2}}" formControlName="billingAddress2" class="form-control" placeholder="Enter your address2" required>
+              </div>
+              <div class="mb-3">
+                <label for="billingCountry" class="form-label">Country</label>
+                <input type="text" id="billingCountry"  value="{{shipingLocation?.country}}" formControlName="country" class="form-control" placeholder="Enter your Country" required>
+              </div>
+    
+              <div class="mb-3">
+                <label for="billingState" class="form-label">State</label>
+                <input type="text" id="billingState" value="{{shipingLocation?.state}}" formControlName="state" class="form-control" placeholder="Enter your State" required>
+              </div>
+    
+              <div class="mb-3">
+                <label for="billingCity" class="form-label">City</label>
+                <input type="text" id="billingCity" value="{{shipingLocation?.city}}" formControlName="city" class="form-control" placeholder="Enter your City" required>
+              </div>
+              <div class="mb-3">
+                <label for="billingZip" class="form-label">Postal Code</label>
+                <input type="text" id="billingZip" value="{{customerAddress?.postal}}" formControlName="postalCode" class="form-control" placeholder="Enter Postal code" required>
+              </div>
+            </form>
+        
+              <!-- </form> -->
+          </div>
+      </div>
+
+      <!-- Order Details Section -->
+      <div class="col-lg-12">
+          <h2>
+           
+              <button class="btn btn-link fw-bold" style="font-size: 24px;" data-bs-toggle="collapse" data-bs-target="#orderDetails" aria-expanded="false" aria-controls="orderDetails">
+                3.Order Details
+              </button>
+          </h2>
+          <div id="orderDetails" class="collapse show">
+              <form [formGroup]="orderDetailsForm" (ngSubmit)="onSubmitOrderDetails()">
+                  <div class="row">
+                      <div class="col-md-4 mb-3">
+                          <label for="cancelDate" class="form-label">Cancel Date</label>
+                          <input type="date" id="cancelDate" formControlName="cancelDate" class="form-control" required>
+                      </div>
+                      <div class="col-md-4 mb-3">
+            <label for="jobRelease" class="form-label">Job Release</label>
+            <input type="text" id="jobRelease" formControlName="jobRelease" class="form-control" placeholder="Enter job release" required>
+          </div>
+    
+          <div class="col-md-4 mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" id="phone" formControlName="phone" class="form-control" placeholder="Enter phone number" required>
+          </div>
+    
+          <div class="col-md-4 mb-3">
+            <label for="poNumber" class="form-label">PO Number</label>
+            <input type="text" id="poNumber" formControlName="poNumber" class="form-control" placeholder="Enter PO number" required>
+          </div>
+    
+          <div class="col-md-4 mb-3">
+            <label for="contact" class="form-label">Contact</label>
+            <input type="text" id="contact" formControlName="contact" class="form-control" placeholder="Enter contact" required>
+          </div>
+    
+          <div class="col-md-4 mb-3">
+            <label for="enteredBy" class="form-label">Entered By</label>
+            <input type="text" id="enteredBy" formControlName="enteredBy" class="form-control" placeholder="Enter your name" required>
+          </div>
+    
+          <div class="col-md-4 mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter your email" required>
+          </div>
+    
+          <div class="col-md-4 mb-3">
+            <label for="paymentType" class="form-label">Payment Type</label>
+            <select id="paymentType" formControlName="paymentType" class="form-control" required>
+              <option value="" disabled selected>Select payment type</option>
+              <option *ngFor="let paym of paymentMethod" [value]="paym.paymentMethod1">{{ paym.paymentMethod1 }}</option>
+            </select>
+          </div>
+    
+          <div class="col-md-4 mb-3">
+            <label for="shipVia" class="form-label">Ship Via</label>
+            <select id="shipVia" formControlName="paymentType" class="form-control" required>
+              <option value="" disabled selected>Select shipVia</option>
+              <option *ngFor="let spvia of SystemShipVia" [value]="spvia.shipViaCode">{{ spvia.shipViaCode }}</option>
+            </select>
+            <!-- <input type="text" id="shipVia" formControlName="shipVia" class="form-control" placeholder="Enter shipping method" required> -->
+          </div>
+    
+          <div class="col-md-4 mb-3">
+            <label for="shippingAccount" class="form-label">Shipping Account</label>
+            <input type="text" id="shippingAccount" formControlName="shippingAccount" class="form-control" placeholder="Enter shipping account" required>
+          </div>
+    
+          <div class="col-md-12 mb-3">
+            <label for="additionalInfo" class="form-label">Additional Info</label>
+            <textarea id="additionalInfo" formControlName="additionalInfo" class="form-control" rows="4" placeholder="Enter any additional info"></textarea>
+          </div>
+        
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit Order Details</button>
+              </form>
+          </div>
+      </div>
+
+      <!-- Payment Information Section -->
+      <!-- <div class="col-lg-12">
+          <h2>
+
+            
+              <button class="btn btn-link fw-bold" style="font-size: 24px;"data-bs-toggle="collapse" data-bs-target="#paymentInfo" aria-expanded="false" aria-controls="paymentInfo">
+              4.Payment Information
+              </button>
+          </h2>
+          <div id="paymentInfo" class="collapse show">
+              <form [formGroup]="paymentForm" (ngSubmit)="onSubmitPayment()">
+                  <div class="row">
+                      <div class="col-md-6 mb-3">
+                          <label for="cardHolderName" class="form-label">Card Holder Name</label>
+                          <input type="text" id="cardHolderName" formControlName="cardHolderName" class="form-control" placeholder="Enter card holder name" required>
+                      </div>
+                     
+          <div class="col-md-6 mb-3">
+            <label for="cardType" class="form-label">Card Type</label>
+            <select id="cardType" formControlName="cardType" class="form-control" required>
+              <option value="" disabled selected>Select card type</option>
+              <option value="visa">Visa</option>
+              <option value="mastercard">MasterCard</option>
+              <option value="amex">American Express</option>
+            </select>
+          </div>
+    
+          <div class="col-md-6 mb-3">
+            <label for="cardNumber" class="form-label">Card Number</label>
+            <input type="text" id="cardNumber" formControlName="cardNumber" class="form-control" placeholder="Enter card number" required>
+          </div>
+    
+          <div class="col-md-3 mb-3">
+            <label for="securityCode" class="form-label">Security Code (CVV)</label>
+            <input type="text" id="securityCode" formControlName="securityCode" class="form-control" placeholder="Enter CVV" required>
+          </div>
+    
+          <div class="col-md-3 mb-3">
+            <label for="expirationMonth" class="form-label">Expiration Month</label>
+            <input type="text" id="expirationMonth" formControlName="expirationMonth" class="form-control" placeholder="MM" required>
+          </div>
+    
+          <div class="col-md-3 mb-3">
+            <label for="expirationYear" class="form-label">Expiration Year</label>
+            <input type="text" id="expirationYear" formControlName="expirationYear" class="form-control" placeholder="YYYY" required>
+          </div>
+    
+          <div class="col-md-6 mb-3">
+            <label for="address1" class="form-label">Address 1</label>
+            <input type="text" id="address1" formControlName="address1" class="form-control" placeholder="Enter address" required>
+          </div>
+    
+          <div class="col-md-6 mb-3">
+            <label for="address2" class="form-label">Address 2</label>
+            <input type="text" id="address2" formControlName="address2" class="form-control" placeholder="Enter address (optional)">
+          </div>
+    
+          <div class="col-md-4 mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" id="country" formControlName="country" class="form-control" placeholder="Enter country" required>
+          </div>
+    
+          <div class="col-md-4 mb-3">
+            <label for="state" class="form-label">State</label>
+            <input type="text" id="state" formControlName="state" class="form-control" placeholder="Enter state" required>
+          </div>
+    
+          <div class="col-md-4 mb-3">
+            <label for="city" class="form-label">City</label>
+            <input type="text" id="city" formControlName="city" class="form-control" placeholder="Enter city" required>
+          </div>
+    
+          <div class="col-md-4 mb-3">
+            <label for="zip" class="form-label">Postal Code</label>
+            <input type="text" id="zip" formControlName="zip" class="form-control" placeholder="Enter postal code" required>
+          </div>
+    
+          <div class="col-md-6 mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter email" required>
+          </div>
+        </div>
+                  <button type="submit" class="btn btn-primary">Submit Payment Information</button>
+              </form>
+          </div>
+      </div> -->
+
+      <!-- Item Details Section -->
+      <div class="col-lg-12">
+          <h2>
+            
+              <button class="btn btn-link fw-bold" style="font-size: 24px;"data-bs-toggle="collapse" data-bs-target="#itemDetails" aria-expanded="false" aria-controls="itemDetails">
+               4.Item Details
+              </button>
+          </h2>
+          <div id="itemDetails" class="collapse show">
+              <table class="table table-bordered">
+                  <thead>
+                      <tr>
+                          <th scope="col">Remove</th>
+                          <th scope="col">Image</th>
+                          <th scope="col">Product Name</th>
+                          <th scope="col">Quantity</th>
+                          <th scope="col">Unit Price</th>
+                          <th scope="col">Total Price</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let item of cartItems; let i = index">
+                          <td>
+                              <button type="button" class="btn btn-danger" (click)="removeItem(i)">
+                                  Remove
+                              </button>
+                          </td>
+                          <td>
+                              <img src="{{imgeUrl}}{{item.imagePath}}" alt="{{ item.itemCode }}" width="50" height="50">
+                          </td>
+                          <td>{{ item.itemCode }}{{item.item_Description}}</td>
+                          <td>
+                              <input type="number" [(ngModel)]="item.quntity" class="form-control" min="1" (change)="updateTotalPrice(i)">
+                          </td>
+                          <td>{{ item.itemPrice | currency }}</td>
+                          <td>{{ item.itemPrice * item.quntity | currency }}</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+      <!-- Proceed to Payment Section -->
+      <div class="row mt-4">
+          <div class="col text-center" style="padding: 5px;">
+              <button type="submit" class="btn btn-primary" (click)="onProceedToPayment()" style="margin: 5px;">
+                  Continue To Shopping
+              </button>
+              <button type="submit" class="btn btn-primary" (click)="onClickContinue()">
+                  Continue
+              </button>
+          </div>
+      </div>
+ </div>
+

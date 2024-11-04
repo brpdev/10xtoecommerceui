@@ -1,0 +1,102 @@
+<div class="cart-container">
+  <div class="col-md-8">
+    <h1 class="head-text color-gray-900 mb-20">Shopping Cart</h1>
+  </div>
+  <div class="shopping-cart Pcarth" *ngIf="isEmpty">
+    <label class="cartlable"> Your shopping cart is empty </label>
+  </div>
+
+  <div class="product-wishlist table-responsive" *ngIf="isEmpty==false">
+    <table class="rwd-table mb-20">
+      <tbody>
+        <tr>
+          <th class="font-md-bold text-white">Image</th>
+          <th class="font-md-bold text-white">Description</th>
+          <th class="font-md-bold text-white">Quantity</th>
+          <th class="font-md-bold text-white" *ngIf="viewUnit">Unit</th>
+          <th class="font-md-bold text-white text-end">Price Per</th>
+          <th class="font-md-bold text-white text-end">Total</th>
+          <th class="font-md-bold text-white text-center">Remove</th>
+        </tr>
+        <tr *ngFor="let item of cartItems; let i = index">
+          <td class="d-flex-td-respo" data-th="Image">
+            <div class="product-image">
+              <a  [routerLink]="['/productDetail',item.itemCode.toLowerCase(),item.item_Description.toLowerCase()]">
+                <img src={{imgeUrl}}{{item.imagePath}} 
+                alt="{{item.itemCode}}" class="cart5050px">
+            </a>
+            </div>
+          </td>
+          <td class="d-flex-td-respo" data-th="Description" style="vertical-align: top;">
+            <div class="product-info pl-td-0">
+              <a [routerLink]="['/productDetail',item.itemCode.toLowerCase()+item.item_Description.toLowerCase()]">
+                <h4 class="cart-product-description color-brand-3 mt-0">
+                  {{item.itemCode}}
+              </h4>
+              {{ item.item_Description }}
+              </a>
+            </div>
+          </td>
+          <td class="d-flex-td-respo" data-th="Quantity">
+            <div class="box-quantity incr-decr-align" id="left-align">
+              <div class="did-floating-label-content mb-0">
+                <div class="increment-wrapper d-flex">
+                  <button class="button dec" (click)="decreaseQuantity(i)">
+                    <i class="fa fa-minus" aria-hidden="true"></i>
+                 </button>
+                 <input class="did-floating-input" [(ngModel)]="item.quntity" aria-label="Quantity input" autocomplete="off" name="quantity-field" title="Qty" type="number" name="Qty" min=1 [attr.min]="1" [attr.max]="99999999">
+                 <label class="did-floating-label" style="left: 40px;">Qty</label>
+                 <button class="button inc" (click)="increaseQuantity(i)">
+                  <i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="d-flex-td-respo" *ngIf="viewUnit" data-th="Unit Price">
+            <div class="did-floating-label-content mb-0">
+              <select class="did-floating-select mt-0 width-90px" id="unitMeasure" name="unitMeasure">
+                <option *ngFor="let unit of availableUnits" [value]="unit.unitName">{{ unit.unitName }}</option>
+              </select>
+              <label class="did-floating-label">unit</label>
+            </div>
+          </td>
+          <td class="d-flex-td-respo" data-th="Price Per">
+            <h4 class="font-base color-brand-3 text-end">
+              {{ item.itemPrice  }}
+            </h4>
+          </td>
+          <td class="d-flex-td-respo" data-th="Total">
+            <h4 class="font-base color-brand-3 text-end">
+              {{ (item.itemPrice * item.quntity)  }}
+            </h4>
+          </td>
+          <td class="d-flex-td-respo" data-th="Remove" class="text-center" style="vertical-align: top;">
+            <a class="btn btn-delete" (click)='removeItem(i)'></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="cart-total">
+      <span>Total: </span>
+      <strong>{{ totalAmount  }}</strong>
+    </div>
+  </div>
+  
+
+    <div class="row">
+
+      <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+          <a class="btn btn-buy w-auto" [routerLink]="['/categories']">Continue Shopping</a>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-6 text-md-end" *ngIf="cartItems != undefined && cartItems.length > 0 && isLoggedIn"
+        >
+        <a class="btn btn-buy w-auto mb-10" (click)="checkout()">
+          Proceed to Checkout
+        </a>
+      </div>
+      
+  </div>
+
+
+  </div>
+  

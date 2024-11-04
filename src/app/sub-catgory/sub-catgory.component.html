@@ -1,0 +1,357 @@
+<div *ngIf="mancategory != undefined || mancategory != null">
+  <div class="section-box shop-template mt-60">
+    <div class="row padding-lr-80">
+      <div class="col-lg-12 order-first order-lg-last">
+        <div class="row" *ngIf="mancategory != null || mancategory != undefined">
+          <h4 *ngIf="mancategory.category != null || mancategory.category != undefined">{{mancategory.category}}</h4>
+        </div>
+        <div class="head-main bd-gray-200" *ngIf="mancategory!=undefined || mancategory!=null" id="catagoryinfo">
+          <div class="row">
+            <div class="col-lg-3 text-center" *ngIf="mancategory!=undefined || mancategory!=null">
+              <a [routerLink]="['/subCatgory', mancategory.categoryTranId]"> 
+                <i class="bi bi-backpack4-fill"></i>
+                <img src="/assets/images/Category/comman.png" [alt]="mancategory.category"/>
+              </a>
+  
+            </div>
+            <div class="col-lg-9">
+              <h3 class="mb-5" *ngIf="mancategory.category!=undefined || mancategory.category!=null">{{mancategory.category}}</h3>
+              <!-- <p *ngIf="pptype==1 && productdetailsforlist[0].descr!=undefined" class="font-base color-gray-500" [innerHTML]="productdetailsforlist[0].descr | safe: 'html'"></p>
+              <h3 class="mb-5" *ngIf="pptype!=1 && productdetailsforlist[0].descr!=undefined">{{productdetailsforlist[0].descr}}</h3> -->
+              <p class="font-base color-gray-500" [innerHTML]="mancategory.category">{{mancategory.category}}</p>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br/>
+<div class="row">
+  <div class="box-filters mt-0 pb-5 border-bottom" *ngIf="childMenuItems!=undefined && childMenuItems!=null && childMenuItems.length>0">
+    <div class="row">
+      <div class="align-flex">
+        <div class="col-xl-2 col-lg-3 mb-10 text-lg-start text-center" *ngIf="Items != undefined || Items != null">
+          <div class="dropdown d-inline-block" *ngIf="childMenuItems!=undefined || childMenuItems!=null &&( showsafilter=='1' && showsafilter1=='1')">
+            <button class="toggle btn btn-filter font-sm color-brand-3 font-medium" (click)="getsetopenview(setopenview)">{{SaFilterLable}}</button>
+          </div>
+        </div>
+        <div class="col-xl-10 col-lg-9 mb-10 text-lg-end text-center">
+          <div class="d-inline-block">
+            <a class="view-type-grid mr-5" [ngClass]="{'active': isListView==1}" (click)="setlistview(1)"></a>
+            <a class="view-type-list mr-5" [ngClass]="{'active': isListView==2}" (click)="setlistview(2)"></a>                                
+          </div>
+        </div>
+      </div>
+    </div>  
+    <div class="row">
+      <div class="col-xl-12 mb-10 text-lg-start">
+        <div class="filter-data">
+          <ul class="align-flex justify-content-start">
+            <!-- <li>
+              <a class="font-xs filter-btn" href="index.html">Custom Fields
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </a>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <ul class="list-grid-col mt-60 mb-60" *ngIf="isListView==1 && childMenuItems!=undefined && childMenuItems!=null && childMenuItems.length>0">
+      <li class="" *ngFor="let item of childMenuItems">
+        <div class="card-grid-style-3 card-style-full-image" style="cursor: pointer;">
+          <div class="card-grid-inner">
+            <div class="image-box">
+              <a [routerLink]="['/subCatgory', item.category]"> 
+                <i class="bi bi-backpack4-fill"></i>
+                <img src="/assets/images/Category/comman.png" [alt]="item.category"/>
+              </a>
+  
+            </div>
+            <div class="info-right">
+              <div class="row">
+              </div>
+                  <a class="color-brand-3 font-md-bold" [routerLink]="['/subCatgory', item.categoryTranId]">{{item.Counts}} items</a>
+                  <h4 class="color-brand-3 font-md-bold text-center" [routerLink]="['/subCatgory', item.categoryTranId]">{{item.category}}</h4>
+                  <div class="price-info" id="webdescr">
+                      <p class="font-base color-brand-3 ellipsis" [innerHTML]="item.category"></p>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="row mt-60 display-list" *ngIf="isListView==2 && childMenuItems!=undefined && childMenuItems!=null && childMenuItems.length>0">
+      <div class="col-lg-12 mb-20" *ngFor="let category of childMenuItems">
+        <div class="card-grid-style-3">
+          <div class="card-grid-inner">
+            <div class="image-box">
+            <a [routerLink]="['/subCatgory', category.category]"> 
+              <i class="bi bi-backpack4-fill"></i>
+              <img src="/assets/images/Category/comman.png" [alt]="category.category"/>
+            </a>
+
+            </div>
+            <div class="info-right">
+              <div class="row">
+              </div>
+              <a class="color-brand-3 font-md-bold" [routerLink]="['/subCatgory', category.category]">{{category.Counts}} items
+              </a>
+              <h4 class="color-brand-3 font-md-bold text-center" [routerLink]="['/subCatgory', category.category]">{{category.category}}</h4>
+              <div class="price-info" id="webdescr">
+                <p class="font-base color-brand-3 ellipsis" [innerHTML]="category.category"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="row padding-lr-80" *ngIf=" Items !=null && Items != undefined && Items.length>0 ">
+    <div class="col-lg-12 order-first order-lg-last">
+      <h4 class="mt-15">Products</h4>
+      <div class="box-filters mt-0 pb-5 border-bottom">
+        <div class="row">
+          <div class="align-flex">
+            <div class="col-xl-2 col-lg-3 mb-10 text-lg-start text-center">
+              <!-- <a class="btn btn-filter font-sm color-brand-3 font-medium" href="#ModalFiltersForm" data-bs-toggle="modal">All Fillters</a> -->
+  
+              <div class="dropdown d-inline-block" *ngIf="Items!=undefined && Items!=null && Items.length>0 && showsafilter=='1' && showsafilter1=='1'">
+                  <button class="toggle btn btn-filter font-sm color-brand-3 font-medium" (click)="getsetopenview(setopenview)">Products</button>
+              </div>
+          </div>
+          <div class="col-xl-10 col-lg-9 mb-10 text-lg-end text-center">
+            <div class="d-inline-block">
+              <span class="font-sm color-gray-500 font-medium">Sort by:</span>
+              <div class="dropdown dropdown-sort border-1-right">
+                <button class="btn dropdown-toggle font-sm color-gray-900 font-medium" id="dropdownSort" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static"><span>1</span></button>
+                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownSort" style="margin: 0px;">
+                    <li>
+                        <a (click)="lowestFirst()" class="dropdown-item">{{LowestPriceFirst}}</a>
+                    </li>
+                    <li>
+                        <a (click)="highestFirst()" class="dropdown-item">{{highestPriceFirst}}</a>
+                    </li>
+                    <li>
+                        <a (click)="AtoZ()" class="dropdown-item">{{ItemAtoZ}}</a>
+                    </li>
+                    <!-- <li>
+                        <a (click)="ZtoA()" class="dropdown-item">{{ItemZtoA}}</a>
+                    </li>
+                    <li *ngIf="isDimensions=='1'">
+                        <a (click)="SortByDimensions()" class="dropdown-item">{{DimensionLable}}</a>
+                    </li>
+                    <li *ngIf="treesort=='1'">
+                        <a (click)="streesort()" class="dropdown-item">{{Sequencelable}}</a>
+                    </li>
+                    <li *ngIf="QuantitySort=='1'">
+                        <a (click)="Quantitysortltoh()" class="dropdown-item">{{LowestQtyFirst}}</a>
+                    </li>
+                    <li *ngIf="QuantitySort=='1'">
+                        <a (click)="Quantitysorthtol()" class="dropdown-item">{{highestQtyFirst}}
+                        </a>
+                    </li>
+                    <li *ngIf="DescrSort=='1'">
+                        <a (click)="DescrSortsortltoh()">{{descrAtoZ}}</a>
+                    </li>
+                    <li *ngIf="DescrSort=='1'">
+                        <a (click)="DescrSortsorthtol()" class="dropdown-item">{{descrZtoA}}</a>
+                    </li>
+                    <li *ngIf="sa13sort=='1'">
+                        <a (click)="sa13sortascsorting()" class="dropdown-item">{{sa13sortasc}}</a>
+                    </li>
+                    <li *ngIf="sa13sort=='1'">
+                        <a (click)="sa13sortdescsorting()" class="dropdown-item">{{sa13sortdesc}}</a>
+                    </li>
+                    <li *ngIf="newestfirstsort=='1'">
+                        <a (click)="newestfirstsorting()" class="dropdown-item">{{newestfirstsortlabel}}</a>
+                    </li> -->
+  
+  
+                </ul>
+              </div>
+              <div class="d-inline-block">
+                <span class="font-sm color-gray-500 font-medium">Show</span>
+                <div class="dropdown dropdown-sort border-1-right">
+                    <button class="btn dropdown-toggle font-sm color-gray-900 font-medium" id="dropdownSort2" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-display="static"><span>10 items</span></button>
+                    <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownSort2">
+                        <li><a class="dropdown-item active" >15 items</a>
+                        </li>
+                        <li><a class="dropdown-item" >30 items</a></li>
+                        <li><a class="dropdown-item" >45 items</a></li>
+                    </ul>
+                </div>
+              </div>
+              <div class="d-inline-block">
+                <a class="view-type-grid mr-5" [ngClass]="{'active': ListTypeView=='1'}" ></a>
+                <a class="view-type-list mr-5" [ngClass]="{'active': ListTypeView=='2'}" ></a>
+                <a class="view-type-table" *ngIf="TableView=='1'" [ngClass]="{'active': ListTypeView=='3'}"></a>
+            </div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 mb-10 text-lg-start">
+            <div class="filter-data">
+              <ul class="align-flex justify-content-start">
+  
+              </ul>
+            </div>  
+          </div>
+        </div>
+        <ul class="list-grid-col mt-60 mb-60" *ngIf="ListTypeView=='1'">
+          <li class="" *ngFor="let item of Items">
+            <div class="card-grid-style-3 card-style-full-image" id="{{item.item_Name}}">
+              <div class="card-grid-inner text-center">
+                <h4>{{item.item_Name}}</h4>
+                <div class="image-box itembox">
+                  <a [routerLink]="['/productDetail', item.item_Name,item.item_Description]" >
+                    <img src={{imagePath}}{{item.imageUrl}} class="pimage itemimg" alt="{{item.item_Name+''+item.item_Description +''+item.weight}}">
+                    <!-- <img src="{{product.image}}" class="pimage itemimg" alt="{{item.item_Name+''+item.item_Description +''+item.weight}}" *ngIf="item.item_Images != undefined && item.item_Images!=null"> -->
+                </a>
+                </div>
+                <div class="info-right">
+                  <div class="font-lg-bold color-brand-2 price-main text-end">
+                    <b *ngIf="item.item_Price!='0'">
+                      <span>{{item.item_Description}}&nbsp;</span>
+                  </b>
+                  </div>
+                  <div class="font-lg-bold color-brand-2 price-main text-end" *ngIf="item.item_Price=='0'">
+                      <b [innerHTML]="item.webdescription"></b>
+                  </div>
+                  <div class="font-lg-bold color-brand-2 price-main text-end">
+                    <b *ngIf="item.item_Price!='0'">
+                        <span>
+                          {{item.item_Price}}&nbsp;</span>
+                        ${{item.item_Price}} <span>{{item.itemUnit}}</span>
+                    </b>
+                    <b *ngIf="item.item_Price!='0'">
+                        ${{item.item_Price}} <span
+                            >{{item.displayunit}}</span>
+                    </b>
+  
+                    <b>{{item.item_Price}}&nbsp;</b>
+                </div>
+                <div class="tag sale sale1" *ngIf="item.countryoforgin!=undefined && item.countryoforgin!=null && item.countryoforgin!='' && item.countryoforgin.includes('SP')">
+                  <span class="sale2">sale</span>
+                </div>
+                <div class="tag sale sale3">
+                    <span class="sale4">New</span>
+                </div>
+                  <div class="product-info text-left" data-match-height="groupName">
+                    <a href="#" class="cpointer" style="width:66% !important">
+                      <h3 class="color-brand-3 font-md-bold" id="itemname">
+                          {{itlable}} {{item.countryoforgin}}
+                      </h3>
+                      <div>
+                          <h4 class="color-brand-3 font-xs-bold" *ngIf="item.item_Price!=''">
+                              Price Per Each:&nbsp;${{item.item_Price}}
+                          </h4>
+                      </div>
+                      <h4 class="color-brand-3 font-xs-bold" *ngIf="item.vendor != null && item.vendor.length > 0">
+                          <label>
+                              Vendor:</label>{{item.vendor[0].customerCode}}</h4>
+                    </a>
+                    <div id="hwl">
+                      <label class="color-brand-3 font-xs-bold pl10px" id="ship_height1">H: <span id="ship_height2">{{item.ship_Height}}</span></label>
+                      <label class="color-brand-3 font-xs-bold pl10px" id="ship_length1">L: <span id="ship_length2">{{item.ship_Length}}</span></label>
+                      <label class="color-brand-3 font-xs-bold pl10px" id="ship_width1">W: <span id="ship_width2">{{item.ship_width}}</span></label>
+                      <label class="color-brand-3 font-xs-bold pl10px" id="weight1">Weight: <span id="weight2">{{item.weight}}</span></label>
+                      <label class="color-brand-3 font-xs-bold pl10px" id="weight_per1">Weight Per: <span id="weight_per2">4</span></label>
+                    </div>
+                    <div id="sa_group_label">
+                    
+                    </div>
+                    <h4 id="min" class="color-brand-3 font-xs-bold" *ngIf="1>0">
+                      <label>min
+                      </label> 1
+                  </h4> 
+                  <h4 id="max" class="color-brand-3 font-xs-bold" *ngIf="1>0">
+                    <label>max
+                    </label> 20
+                  </h4>    
+  
+                  </div>
+                  <br />
+                  <div class="box-quantity justify-content-center mb-10" >
+                    <div class="did-floating-label-content mb-0 mt-8" *ngIf="1!=1">
+                      <div class="increment-wrapper d-flex justify-content-start align-items-center">
+                        
+                      </div>
+                    </div>
+                    <div class="align-flex justify-content-center">
+                      <div class="col-md-12 p-1">
+
+
+
+                        <div class="col-md-12">
+                          <div class="box-quantity mt-15" id="left-align-10">
+                            <div class="did-floating-label-content mb-0">
+                              <div class="increment-wrapper d-flex justify-content-start">
+                                <!-- Decrement button -->
+                                <button type="button" class="button dec" (click)="decrement()">
+                                  <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                                <!-- Quantity input field -->
+                                <input class="did-floating-input" aria-label="Quantity input" autocomplete="off" name="quantity-field" title="Qty"
+                                  [value]="quantity" readonly />
+                                <label class="did-floating-label ml-25">Qty</label>
+                                <!-- Increment button -->
+                                <button type="button" class="button inc" (click)="increment()">
+                                  <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                              </div>
+                            </div>
+                            <br/>
+                           
+                          </div>
+                          <br/>
+                          <div class="did-floating-label-content" *ngIf="viewUnit" id="unitMeasurediv">
+                            <select [(ngModel)]="selectedUnit" class="did-floating-select mt-0 width-90px" id="unitMeasure" name="unitMeasure">
+                                <option *ngFor="let unit of objunit" [value]="unit.unitName">{{ unit.unitName }}</option>
+                              </select>
+                            <label class="did-floating-label ml-5">Unit</label>
+                        </div>
+                          
+                        
+                          <!-- Add to cart button -->
+                          <!-- <div id="addcrt">
+                              <a class="font-md-bold btn btn-buy w-auto mb-10 mr-10"
+                                 (click)="addToCart()">Add to cart</a>
+                          </div>
+                        </div> -->
+                        </div>
+
+
+                        <div class="box-btn-cart"><a class="btn btn-cart w-auto"(click)="addToCart(item.item_Name)">Add to
+                          Cart</a>
+                        </div>
+                        <!-- <div class="box-btn-cart"><a class="btn btn-cart w-auto"  title="Add to cart">Add to
+                          cart</a>
+                      </div> -->
+                       <div class="box-btn-cart" *ngIf="IsLogin">
+                        <a class="btn btn-cart w-auto" title="Add to Quote">Add to
+                          Quote</a>
+                        </div>
+                        <div class="box-btn-cart">
+                          <a class="btn btn-cart w-auto" title="Login to Quote">Login to Quote</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  

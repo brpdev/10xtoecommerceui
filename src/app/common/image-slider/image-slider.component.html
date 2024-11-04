@@ -1,0 +1,18 @@
+<div *ngIf="slides != undefined && slides != null && slides.length > 0">
+    <!-- [config]="slideConfig" -->
+    <ngx-slick-carousel class="carousel main-carousel" #slickModal="slick-carousel"
+    (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
+    (beforeChange)="beforeChange($event)">
+      <div ngxSlickItem class="slide" style="cursor: pointer;" *ngFor="let slide of slides;let i = index">
+        <img (click)="open(i)" [src]="slide.img" [alt]="slide.img" width="100%">
+      </div>
+    </ngx-slick-carousel>
+    <div class="carousel-container" style="overflow-y:scroll;">
+      <!-- [config]="thumbnailConfig" -->
+      <div class="thumbnail-carousel" style="display: flex;">
+        <div  class="thumbnail"  *ngFor="let slide of thumbnailSlides; let i = index">
+          <img [src]="slide.img" (click)="slickModal.slickGoTo(i)" [alt]="slide.img" style="width: 100px;height:100px">
+        </div>
+      </div>
+    </div>
+  </div>

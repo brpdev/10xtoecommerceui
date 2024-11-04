@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+.custom-toast {
+  background-color: #343a40 !important; /* Dark background */
+  color: white !important; /* White text for contrast */
+  border-radius: 8px !important; /* Rounded corners for a modern look */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important; /* Add shadow for depth */
+}
+
+.toast-top-left {
+  top: 2000px; /* Distance from the top */
+  right: 2000px; /* Distance from the right */
+}
+
+.toast-success {
+  background-color: #28a745 !important; /* Use a modern green for success */
+  color: white !important;
+}
+
+
+/* .cdk-overlay-container, .cdk-overlay-pane {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute !important;
+} */
+
+.cdk-overlay-container, .cdk-overlay-pane {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed; /* Change to fixed if you want it relative to the viewport */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Center the popup */
+  z-index: 1000; /* Ensure it's on top */
+}
+
+
+
+.cdk-overlay-pane {
+  position: absolute !important;
+}
+
+
+
+.custom-dialog-container {
+  transform: translate(-50%, -50%) !important; /* Centering */
+  top: 50% !important;
+  left: 50% !important;
+  position: fixed !important;
+}

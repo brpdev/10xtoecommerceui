@@ -1,0 +1,196 @@
+<main class="main">
+    <section class="section-box shop-template mt-100">
+        <div class="row padding-lr-80">
+            <div class="col-md-10 col-lg-10" id="pdrow1">
+                <div class="row">
+                    <div class="col-lg-4 detail-gallery px-3 py-2" *ngIf="galleryImages != undefined && galleryImages != null && galleryImages.length > 0">
+                        <app-image-slider [slides]="galleryImages" [thumbnailSlides]="galleryImages">
+
+                        </app-image-slider>
+                        <!-- <img src={{imagePath}}{{product.imageUrl}}> -->
+                        <h6 class="font-bold text-center">Actual product and finish may vary</h6>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="product-info padding-lr-50">
+                            <div *ngIf="product != undefined && product != null">
+                                <h4 class="font-md" id="vendorname" >{{product.vendor[0].customerCode}}</h4>
+                            </div>
+                            <div class="product-description mt-10" *ngIf="product != undefined && product != null">
+                                <ul style="gap: 15px; margin-top: 20px; margin-bottom: 5px; text-transform: uppercase;">
+                                    <li class="font-md mb-12">
+                                        <h4>{{product.item_Name}}</h4>
+                                    </li>
+                                    <li class="font-md mb-10" *ngIf="product.item_Description!=''">
+                                        {{product.item_Description}}
+                                    </li>
+                                </ul>   
+                                <div class="d-flex mt-15 mb-15 gap-5">
+                                    <ul>
+                                        <li class="font-md mb-10"><span class="mr-5">List:</span>${{product.item_Price}}
+                                        </li>
+                                    </ul>
+                                    <ul *ngIf="IsLogin">
+                                        <li class="font-md mb-10"><strong> <span class="mr-5">Cost:</span>
+                                                Login For Cost
+                                            </strong></li>
+                                    </ul>
+                                </div>
+                                <ul *ngIf="IsLogin">
+                                    <li class="font-md mb-10">
+                                    </li>
+                                    <li class="font-md mb-10"><strong>
+                                            <span class="text-green">Availability:</span> Login to check stock
+                                        </strong></li>
+                                </ul>
+                                <div *ngIf="IsLogin">
+                                    <h6 class="font-bold mt-10 mb-10 text-orange">
+                                        Avaibility: Please call, this <br /> item may be able to be made<br /> from parts on hand
+                                    </h6>
+                                    <h6 class="font-bold mb-10 text-green">Avaibility :
+                                        10 in stock</h6>
+                                </div>
+                                 <div class="buy-product mt-5"
+                                    *ngIf="(product!=undefined && (product.item_Images!=undefined || product.item_Images.length>0)) || (product!=undefined && product!=null)">
+                                    <div class="">
+
+                                        <div class="col-md-12">
+                                            <div class="box-quantity mt-15" id="left-align-10">
+                                              <div class="did-floating-label-content mb-0">
+                                                <div class="increment-wrapper d-flex justify-content-start">
+                                                    <!-- Decrement button -->
+                                                    <button type="button" style="margin-right: 10px;" class="button dec" (click)="decrement()">
+                                                      <i class="fa fa-minus" aria-hidden="true"></i>
+                                                    </button>
+                                                    <!-- Quantity input field -->
+                                                    <input class="did-floating-input" aria-label="Quantity input" autocomplete="off" name="quantity-field" title="Qty"
+                                                      [value]="quantity" readonly />
+                                                    <label class="did-floating-label ml-25">Qty</label>
+                                                    <!-- Increment button -->
+                                                    <button type="button" style="margin-left: 10px;" class="button inc" (click)="increment()">
+                                                      <i class="fa fa-plus" aria-hidden="true"></i>
+                                                    </button>
+                                                  </div>
+                                              </div>
+
+                                              <div class="did-floating-label-content" *ngIf="viewUnit" id="unitMeasurediv">
+                                                <select class="did-floating-select mt-0 width-90px" id="unitMeasure" name="unitMeasure">
+                                                    <option *ngFor="let unit of objunit" [value]="unit.unitName">{{ unit.unitName }}</option>
+                                                  </select>
+                                                <label class="did-floating-label ml-20">Unit</label>
+                                            </div>
+                                            </div>
+                                            <br/>
+                                            
+                                          
+                                            <!-- Add to cart button -->
+                                            <div id="addcrt">
+                                                <a class="font-md-bold btn btn-buy w-auto mb-10 mr-10"
+                                                   (click)="addToCart()">Add to cart</a>
+                                            </div>
+                                          </div>
+                                          
+                                        <!-- <div class="col-md-12">
+                                            <div class="box-quantity mt-15" id="left-align-10">
+                                                <div class="did-floating-label-content mb-0">
+                                                    <div class="increment-wrapper d-flex justify-content-start">
+                                                        <button type="button" class="button dec" >
+                                                            <i class="fa fa-minus" aria-hidden="true"></i>
+                                                        </button>
+                                                        <input class="did-floating-input" aria-label="Quantity input"
+                                                        autocomplete="off" name="quantity-field" title="Qty" value="2"
+                                                        id="txtQuantity" type="number" name="Quantity" 
+                                                         min=1 max="9999" minLength="1"
+                                                        maxLength="4"
+                                                        >
+                                                    <label class="did-floating-label ml-25">Qty</label>
+                                                    <div class="button inc" >
+
+                                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div class="did-floating-label-content" id="unitMeasurediv">
+                                                    <section class="did-floating-select mt-0 ml-15" id="unitMeasure"
+                                                         name="unitMeasure">
+                                                         <option value="Unit">
+                                                            aa
+                                                        </option>
+                                                        <option value="Unit1">
+                                                            ea
+                                                        </option>
+                                                    </section>
+                                                    <label class="did-floating-label ml-20">Unit</label>
+                                                </div>
+                                                <div id="addcrt">
+                                                    <a class="font-md-bold btn btn-buy w-auto mb-10 mr-10">
+                                                        Add to cart
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-12">
+                        <ul class="nav nav-tabs nav-tabs-product" role="tablist">
+                                <li>
+                                    <a [ngClass]="{'active': tabord==1}" href="#tab-featureTitle" (click)="activetabord(1)"
+                                        data-bs-toggle="tab" role="tab" aria-controls="tab-featureTitle" id="satab"
+                                        aria-selected="true">Product Details</a>
+                                </li>
+                                <li>
+            
+                                    <a [ngClass]="{'active': tabord==3}" href="#tab-overviewTitle" data-bs-toggle="tab" role="tab"
+                                        (click)="activetabord(3)" aria-controls="tab-overviewTitle" id="overtab"
+                                        aria-selected="true">Decription </a>
+                                </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade" [ngClass]="{'active show': tabord==1}" *ngIf="product!=undefined"
+                            id="tab-featureTitle" role="tabpanel" aria-labelledby="tab-featureTitle">
+                            <!-- <h5 class="mb-25">{{featureTitle}}</h5> -->
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <ng-container
+                                        *ngIf="product!=null && product!=undefined">
+                                        <tr>
+                                            <td>Weight</td>
+                                            <td>{{product.weight}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ship width</td>
+                                            <td>{{product.ship_width}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ship Height</td>
+                                            <td>{{product.ship_Height}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ship Length</td>
+                                            <td>{{product.ship_Length}}</td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                                </table>
+                            </div>
+                            </div>
+                            <div class="tab-pane fade" [ngClass]="{'active show': tabord==3}" id="tab-overviewTitle" role="tabpanel"
+                                aria-labelledby="tab-overviewTitle">
+                                <!-- <h5 class="mb-25">{{overviewTitle}}</h5> -->
+                                <div class="display-text-short">
+                                    <div style="margin-top:10px;" *ngIf="product!=null && product!=undefined  && product!='undefined'"
+                                        [innerHTML]="product.webdescription" class="list-d"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div> 
+        </div>
+    </section>
+</main>

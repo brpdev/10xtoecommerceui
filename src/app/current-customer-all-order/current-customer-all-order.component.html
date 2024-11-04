@@ -1,0 +1,39 @@
+<div class="cart-container">
+    <div class="col-md-8">
+        <h1 class="head-text color-gray-900 mb-20">Orders list</h1>
+    </div>
+    <div class="product-wishlist table-responsive">
+        <table class="rwd-table mb-20">
+            <tbody>
+                <tr>
+                    <th class="font-md-bold text-white">Order Id</th>
+                    <th class="font-md-bold text-white">Order Date</th>
+                    <th class="font-md-bold text-white">Amount</th>
+                    <th class="font-md-bold text-white">Discout Amount</th>
+                    <th class="font-md-bold text-white text-end">Tax Amount</th>
+                    <th class="font-md-bold text-white text-end">Sub Total</th>
+                </tr>
+                <tr *ngFor="let item of allOrders; let i = index">
+                    <td class="d-flex-td-respo" data-th="orderId">
+                        {{item.orderId}}
+                    </td>
+                    <td class="d-flex-td-respo" data-th="orderDate">
+                        {{item.orderDate}}
+                    </td>
+                    <td class="d-flex-td-respo" data-th="totalAmout">
+                        {{item.totalAmout}}
+                    </td>
+                    <td class="d-flex-td-respo" data-th="DiscountAmount">
+                        0
+                    </td>
+                    <td class="d-flex-td-respo" data-th="TaxAmount">
+                        16.0
+                    </td>
+                    <td class="d-flex-td-respo" data-th="SubTotal">
+                        {{item.totalAmout + 16.0}}
+                   </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
